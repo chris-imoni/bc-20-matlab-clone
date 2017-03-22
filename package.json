@@ -1,0 +1,23 @@
+{
+  "name": "matlab-clone",
+  "version": "1.0.0",
+  "description": "A simple matlab clone that performs array and matrix operations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Imoni Christopher",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.7"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chris-imoni/Matlab-clone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/chris-imoni/Matlab-clone/issues"
+  },
+  "homepage": "https://github.com/chris-imoni/Matlab-clone#readme"
+}
