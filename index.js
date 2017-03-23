@@ -7,7 +7,9 @@ str,
 result;
 
 input = readlineSync.question(
-    'Enter 1 to create array\nEnter 2 to create a Matrix \nEnter 3 to create a vector of zeros\nEnter 4 for matrix and number addition\n' 
+    'Enter 1 to create array\nEnter 2 to create a Matrix \nEnter 3 to create a vector of zeros\n'+
+    'Enter 4 for matrix and number addition\n'+
+    'Enter 5 for transposing a matrix\n' 
     );
 //Converting what the user enter to integer
 num = parseInt(input);
@@ -78,6 +80,19 @@ if(num == 1){
     }
     var b = parseInt(str);
     result = mat_add(arr, b);
+    if(!result){
+        console.log("Oops! Your array should contain numbers only. Try again");
+    }else{
+        console.log("\n");
+        console.log(result);
+    }
+}else if(num == 5){
+    str = readlineSync.question('Enter numbers separted by comma for each row, separate each row with a semicolon\n');
+    while(str == "" || str == null){
+        console.log("Invalid entry. Try again");
+         str = readlineSync.question('Enter numbers separted by comma for each row, separate each row with a semicolon\n');
+    }
+    result = matrix_trans(str);
     if(!result){
         console.log("Oops! Your array should contain numbers only. Try again");
     }else{
@@ -183,3 +198,67 @@ function mat_add(arr, b){
 	
 	return output;
 }
+
+//Function for transposing a matrix
+matrix_trans("1,2,3;4,5,6");
+
+function matrix_trans(a){
+	var arr = a.split(";"),
+	output="", 
+	a = [], 
+	rows = [],
+	i,
+	j=0;
+	transpose = [],
+	row1 = [];
+	
+	output += 'The matrix\n';
+	for(var row=0; row < arr.length; row++){
+		a[row] = [];
+		rows[row] = arr[row];
+		row1 = rows[row].split(",");
+		for(var col=0; col < row1.length; col++){
+			a[row][col] = row1[col];
+			output += a[row][col] +"\t";
+		}
+		output += '\n';
+	}
+	output += '\n';
+	
+	i = arr.length;
+	//initializing
+	for(row = 0; row < i; row++){
+		a[row] = [];
+		rows[row] = arr[row];
+		row1= rows[row].split(',');
+		j = row1.length;
+		for(col = 0; col < j; col++){
+			transpose[col] = [];
+		}
+
+	for (var row = 0; row < arr.length; row++) {
+		a[row] = [];
+		rows[row]= arr[row];
+		row1 = rows[row].split(",");
+		for (var col = 0; col < row1.length; col++) {
+			a[row][col] = row1[col];
+		}
+  }
+  
+  for (var row = 0; row < i; row++) {
+    for (var col = 0; col < j; col++) {
+		transpose[col][row]= a[row][col]
+    }
+  }
+  
+   for (var row = 0; row < i; row++) {
+    for (var col = 0; col < j; col++) {
+		output += transpose[row][col] + "\t";
+    }
+	output += "\n";
+  }
+}	
+	
+	return output;
+}
+
