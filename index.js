@@ -3,9 +3,12 @@ var readlineSync = require('readline-sync');
 // Wait for user's response.
 var input = "",
 num,
-str;
+str,
+result;
 
-input = readlineSync.question('Enter 1 to create array,\nEnter 2 to create a Matrix \n');
+input = readlineSync.question(
+    'Enter 1 to create array\nEnter 2 to create a Matrix \nEnter 3 to create a vector of zeros\n' 
+    );
 //Converting what the user enter to integer
 num = parseInt(input);
 
@@ -19,7 +22,7 @@ if(num == 1){
 
     var arr = str.split(",");
     if(ValidateArr(arr)){
-        var result = createArr(arr);
+        result = createArr(arr);
         console.log("["+result.trim(" ") +"]");
     }else{
         console.log("Oops! Your array should contain numbers only. Try again");
@@ -33,13 +36,33 @@ if(num == 1){
          str = readlineSync.question('Enter numbers separted by comma for each row, separate each row with a semicolon\n');
     }
     var arr = str.split(";");
-    var result = createMatrix(arr);
+    result = createMatrix(arr);
     if(!result){
         console.log("Oops! Your array should contain numbers only. Try again");
     }else{
         console.log(result);
     }
 
+
+}else if(num == 3){
+    str = readlineSync.question('Enter value for row\n');
+    while(isNaN(str) || str == 0){
+        console.log("Invalid entry! only number other than zero is allowed");
+        str = readlineSync.question('Enter value for row\n');
+    }
+
+    var r = parseInt(str);
+
+    str = readlineSync.question('Enter value for column\n');
+    while(isNaN(str) || str == 0){
+        console.log("Invalid entry! only number other than zero is allowed");
+        str = readlineSync.question('Enter value for column\n');
+    }
+
+    var c = parseInt(str);
+    result = vector_zeros(r,c);
+    console.log("\n");
+    console.log(result);
 
 }else{
     console.log("You entered an invalid command. Try again");
@@ -90,5 +113,28 @@ function createMatrix(arr){
 	}
 	
 	
+	return output;
+}
+
+//Function for creating vector of zeros
+function vector_zeros(rows, cols){
+	var iRow = rows,
+	jCol = cols,
+	output = "",
+	f = [];
+	for (i = 0; i < iRow; i++) {
+	 f[i] = [];
+	 for (j = 0; j < jCol; j++) {
+	  f[i][j] = 0;
+	 }
+	}
+
+	for (i = 0; i < iRow; i++) {
+	 for (j = 0; j < jCol; j++) {
+	  output += f[i][j] + "   ";
+	 }
+	 output += "\n";
+	}
+
 	return output;
 }
