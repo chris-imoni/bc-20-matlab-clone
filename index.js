@@ -14,6 +14,7 @@ function start_lab(){
 	'Enter 3 to create a vector of zeros\n'+
     'Enter 4 for matrix and number addition\n'+
     'Enter 5 for transposing a matrix\n'+
+	'Enter 6 for matrix concatenation\n'+
 	'Enter zero (0) to terminate\n'
     );
 	//Converting what the user enter to integer
@@ -125,6 +126,24 @@ function start_lab(){
 		}
 	}
 	
+	else if(num == 6){
+		str = readlineSync.question('Enter first array, separate each row with a semicolon\n');
+		var a = str.split(";");
+		str = readlineSync.question('Enter second array, separate each row with a semicolon\n');
+		var b = str.split(";");
+		r1 = createMatrix(a);
+		r2 = createMatrix(b);
+		if(r1 == false || r2 == false){
+			console.log("Oops! Your arrays should contain only numbers. Try again\n");
+			lab_option();
+		}else{
+			result = r1.concat(r2);
+			console.log("\n");
+			console.log(result);
+			lab_option();
+		}
+
+	}
 	else{
 		console.log("You entered an invalid command. Try again");
 		lab_option();
